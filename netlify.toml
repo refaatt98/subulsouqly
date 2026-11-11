@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+# /api/* is served by the Netlify Function itself (config.path in netlify/functions/api.mts),
+# so no redirect rule is needed for it. Only the SPA fallback stays.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build.environment]
+  R2_ACCOUNT_ID = "0468b12484627328018d2b95002d6db6"
+  R2_BUCKET = "subul"
+  R2_ACCESS_KEY_ID = "635b35b67140b6f430c6a1dade1e528d"
+  R2_SECRET_ACCESS_KEY = "f983f2865d83d197235acdf49fc01376904653d406937a0b7e382b7312ba8b23"
+  R2_PUBLIC_URL = "https://pub-39e14443453346089c10d5c6537b7a1f.r2.dev"
