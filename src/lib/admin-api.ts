@@ -1,6 +1,14 @@
 import { supabase } from "@/integrations/supabase/client";
 
-const FN_URL = `${import.meta.env['VITE_SUPABASE_URL']}/functions/v1/admin-api`;
+// Fall back to the project's public values when the VITE_* vars aren't set (e.g. on Netlify).
+const SUPABASE_URL =
+  (import.meta.env['VITE_SUPABASE_URL'] as string | undefined) ||
+  "https://ifmefsqkwdbgymsnrcnb.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY =
+  (import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'] as string | undefined) ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlmbWVmc3Frd2RiZ3ltc25yY25iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNDEyOTcsImV4cCI6MjEwMzkxNzI5N30.XrydFkup3c8cr5KcIP5rGntf3XbTMuQVyZQpqWnXyME";
+
+const FN_URL = `${SUPABASE_URL}/functions/v1/admin-api`;
 
 export type AdminUser = {
   id: string;
@@ -21,7 +29,7 @@ async function call<T>(op: string, payload: unknown = {}): Promise<T> {
     headers: {
       "content-type": "application/json",
       authorization: `Bearer ${token}`,
-      apikey: import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'] as string,
+      apikey: SUPABASE_PUBLISHABLE_KEY,
     },
     body: JSON.stringify(payload),
   });
@@ -59,7 +67,7 @@ export async function uploadMedia(file: File): Promise<string> {
     method: "POST",
     headers: {
       authorization: `Bearer ${token}`,
-      apikey: import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY'] as string,
+      apikey: SUPABASE_PUBLISHABLE_KEY,
       "content-type": file.type || "application/octet-stream",
       "x-file-name": file.name,
     },

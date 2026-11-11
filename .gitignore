@@ -1,0 +1,19 @@
+# Dependencies & build output
+node_modules/
+dist/
+dist-ssr/
+
+# Netlify local state
+.netlify/
+
+# Local env files (never commit secrets)
+.env
+.env.*
+!.env.example
+
+# Logs & OS / editor junk
+*.log
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
