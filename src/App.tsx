@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import Product from "@/pages/Product";
 import Auth from "@/pages/Auth";
 import NotFound from "@/pages/NotFound";
+import Four from "@/pages/Four";
 import { RequireAuth } from "@/components/RequireAuth";
 import { ScrollToTop, PageTransition } from "@/components/PageTransition";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -43,6 +44,7 @@ export default function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/product/:id" element={<Product />} />
                   <Route path="/auth" element={<Auth />} />
+                  <Route path="/4" element={<Four />} />
                   <Route
                     path="/admin"
                     element={
